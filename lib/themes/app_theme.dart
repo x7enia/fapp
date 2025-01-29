@@ -3,41 +3,71 @@ import '../utils/constants.dart';
 
 class AppTheme {
   static ThemeData get lightTheme {
-    // A light theme that emphasizes the green color scheme from constants.dart
     return ThemeData(
-      primaryColor: kPrimaryColor,
-      scaffoldBackgroundColor: kBackgroundColor,
-      // This sets up a basic Material ColorScheme based on the primary color
-      colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green).copyWith(
-        secondary: kAccentColor, // for FAB, highlight color, etc.
+      // Define the primary and secondary colors
+      primaryColor: kColor4,
+      scaffoldBackgroundColor: kColor1,
+
+      // Define the color scheme
+      colorScheme: ColorScheme.light(
+        primary: kColor4,
+        secondary: kColor3,
       ),
+
       // AppBar styling
       appBarTheme: const AppBarTheme(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: kColor4,
         elevation: 0,
         centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
+        titleTextStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
       ),
-      // BottomAppBar
-      bottomAppBarColor: kPrimaryColor,
-      // FloatingActionButton
+
+      // BottomAppBar styling
+      bottomAppBarTheme: const BottomAppBarTheme(
+        color: kColor4,
+        elevation: 10,
+      ),
+
+      // FloatingActionButton styling
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: kPrimaryColor,
-        elevation: 4,
+        backgroundColor: kColor3,
+        elevation: 6,
       ),
-      // ElevatedButton, OutlinedButton, etc.
+
+      // ElevatedButton styling
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
-          backgroundColor: kPrimaryColor,
+          backgroundColor: kColor4,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
       ),
+
+      // Text Theme
       textTheme: const TextTheme(
         bodyLarge: TextStyle(color: Colors.black87),
         bodyMedium: TextStyle(color: Colors.black87),
       ),
+
+      // Icon Theme
+      iconTheme: const IconThemeData(color: kColor4),
+
+      // BottomNavigationBar Theme
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: kColor4,
+        selectedItemColor: kColor3,
+        unselectedItemColor: Colors.white70,
+        elevation: 20,
+        type: BottomNavigationBarType.fixed,
+      ),
+
       visualDensity: VisualDensity.adaptivePlatformDensity,
     );
   }

@@ -15,35 +15,35 @@ class _CustomNavBarState extends State<CustomNavBar> {
     setState(() {
       _selectedIndex = index;
     });
-    // Implement navigation or other logic...
+    // Implement navigation or other logic based on index
   }
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      color: kPrimaryColor,
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 6,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildNavItem(Icons.home_outlined, 0),
-          _buildNavItem(Icons.category_outlined, 1),
-          const SizedBox(width: 40), // Space for the FAB
-          _buildNavItem(Icons.history_outlined, 2),
-          _buildNavItem(Icons.person_outline, 3),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNavItem(IconData icon, int index) {
-    final isSelected = _selectedIndex == index;
-    return IconButton(
-      icon: Icon(icon,
-          color: isSelected ? Colors.white : Colors.white70),
-      onPressed: () => _onItemTap(index),
-      splashColor: Colors.white30,
+    return BottomNavigationBar(
+      currentIndex: _selectedIndex,
+      selectedItemColor: kColor3, // Using kColor3 as selected color
+      unselectedItemColor: Colors.white70,
+      onTap: _onItemTap,
+      backgroundColor: kColor4, // Using kColor4 as background
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home_outlined),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.category_outlined),
+          label: 'Categories',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.shopping_cart_outlined),
+          label: 'Cart',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person_outline),
+          label: 'Profile',
+        ),
+      ],
     );
   }
 }

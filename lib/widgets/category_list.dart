@@ -12,28 +12,28 @@ class CategoryList extends StatelessWidget {
     return SizedBox(
       height: 100,
       child: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         separatorBuilder: (_, __) => const SizedBox(width: 12),
         itemBuilder: (context, index) {
           final category = categories[index];
           return InkWell(
-            borderRadius: BorderRadius.circular(12),
             onTap: () {
-              // Navigate to subcategory screen or do something
+              // Navigate to subcategory or perform an action
             },
+            borderRadius: BorderRadius.circular(12),
             child: Container(
               width: 80,
               decoration: BoxDecoration(
-                color: kCardColor,
+                color: kColor2,
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.08),
-                    blurRadius: 4,
-                    offset: const Offset(2, 4),
-                  )
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 6,
+                    offset: const Offset(0, 3),
+                  ),
                 ],
               ),
               child: Column(
@@ -45,7 +45,6 @@ class CategoryList extends StatelessWidget {
                         category.imageUrl,
                         fit: BoxFit.cover,
                         width: double.infinity,
-                        alignment: Alignment.center,
                       ),
                     ),
                   ),
@@ -56,7 +55,7 @@ class CategoryList extends StatelessWidget {
                       category.name,
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        fontSize: 13,
+                        fontSize: 14,
                         color: Colors.black87,
                       ),
                       overflow: TextOverflow.ellipsis,

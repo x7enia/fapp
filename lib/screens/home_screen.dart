@@ -35,13 +35,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
-      // FloatingActionButton for quick access to cart (example)
+      backgroundColor: kColor1, // Set background color
       floatingActionButton: FloatingActionButton(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: kColor3, // Use kColor3 for FAB
         child: const Icon(Icons.shopping_cart_outlined),
         onPressed: () {
-          // Navigate to cart, etc.
+          // Navigate to cart or perform an action
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -49,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
       body: CustomScrollView(
         slivers: [
-          // SliverAppBar with a green gradient
+          // SliverAppBar with a gradient background
           SliverAppBar(
             expandedHeight: 250,
             pinned: true,
@@ -57,25 +56,27 @@ class _HomeScreenState extends State<HomeScreen> {
               centerTitle: true,
               title: const Text(
                 'Grocery Store',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
               background: Stack(
                 fit: StackFit.expand,
                 children: [
+                  // Gradient background
                   Container(
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [
-                          Color(0xFF81C784), // Lighter green
-                          kPrimaryColor,     // Main green
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
+                        colors: [kColor2, kColor3],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
                     ),
                   ),
+                  // Semi-transparent image overlay
                   Opacity(
-                    opacity: 0.25,
+                    opacity: 0.3,
                     child: Image.asset(
                       'assets/images/1.jpg',
                       fit: BoxFit.cover,
@@ -90,11 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Column(
-                children: const [
-                  CustomSearchBar(),
-                ],
-              ),
+              child: const CustomSearchBar(),
             ),
           ),
 
@@ -109,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
             sliver: SliverGrid(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisExtent: 260,
+                mainAxisExtent: 280,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
               ),
