@@ -12,26 +12,28 @@ class CategoryList extends StatelessWidget {
     return SizedBox(
       height: 100,
       child: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         separatorBuilder: (_, __) => const SizedBox(width: 12),
         itemBuilder: (context, index) {
           final category = categories[index];
           return InkWell(
-            onTap: () {},
             borderRadius: BorderRadius.circular(12),
+            onTap: () {
+              // Navigate to subcategory screen or do something
+            },
             child: Container(
               width: 80,
               decoration: BoxDecoration(
-                color: kColor2,
+                color: kCardColor,
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.06),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  ),
+                    color: Colors.black.withOpacity(0.08),
+                    blurRadius: 4,
+                    offset: const Offset(2, 4),
+                  )
                 ],
               ),
               child: Column(
@@ -43,23 +45,24 @@ class CategoryList extends StatelessWidget {
                         category.imageUrl,
                         fit: BoxFit.cover,
                         width: double.infinity,
-                        alignment: Alignment.topCenter,
+                        alignment: Alignment.center,
                       ),
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(4),
+                  const SizedBox(height: 4),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Text(
                       category.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        color: Colors.black87,
                         fontWeight: FontWeight.w600,
                         fontSize: 13,
+                        color: Colors.black87,
                       ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
+                  const SizedBox(height: 4),
                 ],
               ),
             ),

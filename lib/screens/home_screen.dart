@@ -35,40 +35,47 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Advanced bottom nav bar
+      backgroundColor: kBackgroundColor,
+      // FloatingActionButton for quick access to cart (example)
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: kPrimaryColor,
+        child: const Icon(Icons.shopping_cart_outlined),
+        onPressed: () {
+          // Navigate to cart, etc.
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const CustomNavBar(),
+
       body: CustomScrollView(
         slivers: [
+          // SliverAppBar with a green gradient
           SliverAppBar(
+            expandedHeight: 250,
             pinned: true,
-            floating: false,
-            expandedHeight: 270,
-            // Instead of a flat color, we use a gradient
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: const Text(
                 'Grocery Store',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // Gradient behind the image
                   Container(
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [kColor2, kColor3],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                        colors: [
+                          Color(0xFF81C784), // Lighter green
+                          kPrimaryColor,     // Main green
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
                       ),
                     ),
                   ),
-                  // Main image
                   Opacity(
-                    opacity: 0.7,
+                    opacity: 0.25,
                     child: Image.asset(
                       'assets/images/1.jpg',
                       fit: BoxFit.cover,
@@ -77,46 +84,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            backgroundColor: Colors.transparent,
           ),
+
+          // Search bar section
           SliverToBoxAdapter(
-            child: Container(
-              // This container has a slightly rounded top edge
-              decoration: const BoxDecoration(
-                color: kColor1,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                child: Column(
-                  children: const [
-                    CustomSearchBar(),
-                  ],
-                ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: Column(
+                children: const [
+                  CustomSearchBar(),
+                ],
               ),
             ),
           ),
+
+          // Category horizontal list
           SliverToBoxAdapter(
-            child: Container(
-              color: kColor1,
-              child: CategoryList(categories: _categories),
-            ),
+            child: CategoryList(categories: _categories),
           ),
+
+          // Product Grid
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.all(16),
             sliver: SliverGrid(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisExtent: 260,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+              ),
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   final product = _products[index];
                   return ProductCard(product: product);
                 },
                 childCount: _products.length,
-              ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisExtent: 270,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
               ),
             ),
           ),
